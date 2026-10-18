@@ -25,7 +25,7 @@ OAuth2_bearer=OAuth2PasswordBearer(tokenUrl='login')
 
 SECRET_KEY =os.getenv("SECRET_KEY")
 ALGORITHM = os.getenv("ALGORITHM")
-TIME=os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES")
+
 
 # ============================
 #  Response
@@ -95,7 +95,7 @@ def login_user(db:db_dependency,form_data:Annotated[OAuth2PasswordRequestForm,De
     if user==False:
         return "Failed Authentication"
 
-    token=create_access_token(user.username,user.id,timedelta(minutes=TIME))
+    token=create_access_token(user.username,user.id,timedelta(minutes=30))
     return {'access_token':token,"token_type":'bearer'}
 
 
